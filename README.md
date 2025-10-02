@@ -6,6 +6,12 @@ A Next.js application for distributing tokens to multiple addresses on the SUI n
 [![GitHub stars](https://img.shields.io/github/stars/gmussi/sui-airdrop.svg)](https://github.com/gmussi/sui-airdrop/stargazers)
 [![GitHub issues](https://img.shields.io/github/issues/gmussi/sui-airdrop.svg)](https://github.com/gmussi/sui-airdrop/issues)
 
+## 🚀 CHECK LIVE DEMO
+
+**[👉 Try the Live Demo](https://gmussi.github.io/sui-airdrop/)** - Experience the SUI Airdrop Tool in action!
+
+---
+
 ## Features
 
 - **Wallet Connection**: Connect your SUI wallet using the latest wallet adapters
@@ -132,10 +138,6 @@ Contributions are welcome! Please feel free to submit a Pull Request. For major 
 3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
 4. Push to the branch (`git push origin feature/AmazingFeature`)
 5. Open a Pull Request
-
-## Live Demo
-
-You can see a live demo of this application at: [https://gmussi.github.io/sui-airdrop](https://gmussi.github.io/sui-airdrop)
 
 ## Roadmap
 
