@@ -2,8 +2,16 @@
   "version": 3,
   "pages404": true,
   "caseSensitive": false,
-  "basePath": "",
+  "basePath": "/sui-airdrop",
   "redirects": [
+    {
+      "source": "/sui-airdrop",
+      "destination": "/sui-airdrop/",
+      "basePath": false,
+      "internal": true,
+      "statusCode": 308,
+      "regex": "^/sui-airdrop$"
+    },
     {
       "source": "/:file((?!\\.well-known(?:/.*)?)(?:[^/]+/)*[^/]+\\.\\w+)/",
       "destination": "/:file",
@@ -27,7 +35,13 @@
   ],
   "headers": [],
   "rewrites": {
-    "beforeFiles": [],
+    "beforeFiles": [
+      {
+        "source": "/sui-airdrop//_next/:path+",
+        "destination": "/sui-airdrop/_next/:path+",
+        "regex": "^/sui-airdrop//_next(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))(?:/)?$"
+      }
+    ],
     "afterFiles": [],
     "fallback": []
   },

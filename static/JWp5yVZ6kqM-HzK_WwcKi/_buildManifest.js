@@ -1,10 +1,15 @@
 self.__BUILD_MANIFEST = {
   "/_error": [
-    "./static/chunks/4fcfa8c7c326a8bd.js"
+    "./static/chunks/e9a5a27b97d9b0df.js"
   ],
   "__rewrites": {
     "afterFiles": [],
-    "beforeFiles": [],
+    "beforeFiles": [
+      {
+        "source": "/sui-airdrop//_next/:path+",
+        "destination": "/sui-airdrop/_next/:path+"
+      }
+    ],
     "fallback": []
   },
   "sortedPages": [
