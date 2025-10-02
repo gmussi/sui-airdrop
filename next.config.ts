@@ -9,8 +9,8 @@ const nextConfig: NextConfig = {
   // Enable static export for GitHub Pages
   distDir: "dist",
   // Add base path if deploying to a subdirectory
-  // basePath: '/sui-airdrop',
-  // assetPrefix: '/sui-airdrop/',
+  basePath: '/sui-airdrop',
+  assetPrefix: '/sui-airdrop/',
 };
 
 export default nextConfig;
