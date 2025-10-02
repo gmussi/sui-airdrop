@@ -10,8 +10,8 @@ export function WalletConnection() {
     connected, 
     connecting, 
     disconnect, 
-    wallets, 
-    currentWallet,
+    allAvailableWallets, 
+    name,
     account
   } = useWallet();
   
@@ -23,11 +23,11 @@ export function WalletConnection() {
 
   // Debug logging
   console.log('WalletConnection Debug:', {
-    wallets: wallets,
-    walletsLength: wallets?.length,
+    wallets: allAvailableWallets,
+    walletsLength: allAvailableWallets?.length,
     connected,
     connecting,
-    currentWallet,
+    walletName: name,
     account,
     accountAddress: account?.address,
     mounted
@@ -44,14 +44,14 @@ export function WalletConnection() {
     );
   }
 
-  if (connected && currentWallet) {
+  if (connected && name) {
     return (
       <div className="p-4 bg-green-50 border border-green-200 rounded-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <div className="w-3 h-3 bg-green-500 rounded-full"></div>
             <span className="text-sm font-medium text-green-800">
-              Connected: {currentWallet.name}
+              Connected: {name}
             </span>
           </div>
           <Button
@@ -91,7 +91,7 @@ export function WalletConnection() {
           </summary>
           <div className="mt-2 space-y-1">
             <p className="text-xs text-gray-600">
-              Wallets array length: {wallets?.length || 'undefined'}
+              Wallets array length: {allAvailableWallets?.length || 'undefined'}
             </p>
             <p className="text-xs text-gray-600">
               Connected: {connected ? 'Yes' : 'No'}

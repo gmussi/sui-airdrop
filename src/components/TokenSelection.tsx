@@ -49,12 +49,6 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
     accountAddress: account?.address
   });
 
-  useEffect(() => {
-    if (account && connected) {
-      fetchTokens();
-    }
-  }, [account, connected, fetchTokens]);
-
   const fetchTokens = useCallback(async () => {
     if (!account) return;
     
@@ -112,10 +106,10 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
           return {
             coinType,
             metadata: {
-              symbol: metadata.symbol,
-              name: metadata.name,
-              decimals: metadata.decimals,
-              iconUrl: metadata.iconUrl,
+              symbol: metadata?.symbol || 'Unknown',
+              name: metadata?.name || coinType,
+              decimals: metadata?.decimals || 9,
+              iconUrl: metadata?.iconUrl || undefined,
             }
           };
         } catch (error) {
@@ -144,6 +138,12 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
       setLoading(false);
     }
   }, [account]);
+
+  useEffect(() => {
+    if (account && connected) {
+      fetchTokens();
+    }
+  }, [account, connected, fetchTokens]);
 
   const formatBalance = (balance: string, decimals: number) => {
     const num = BigInt(balance);

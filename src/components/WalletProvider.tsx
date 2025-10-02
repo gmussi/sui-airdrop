@@ -21,7 +21,6 @@ export function AppWalletProvider({ children }: WalletProviderProps) {
   return (
     <WalletProvider 
       autoConnect={false}
-      enableUnsafeBurner={false}
     >
       <WalletContext.Provider value={{}}>
         {children}

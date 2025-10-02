@@ -79,7 +79,7 @@ export function AirdropExecution({ selectedToken, recipients, tokenInfo }: Airdr
         txb.setSender(account!.address);
         
         // Split coins for each recipient in the batch
-        const coinObjects: string[] = [];
+        const coinObjects: unknown[] = [];
         for (const recipient of batch) {
           const amount = BigInt(Math.floor(parseFloat(recipient.amount) * Math.pow(10, tokenDecimals)));
           
@@ -103,18 +103,15 @@ export function AirdropExecution({ selectedToken, recipients, tokenInfo }: Airdr
         // Transfer coins to recipients
         batch.forEach((recipient, index) => {
           if (coinObjects[index]) {
-            txb.transferObjects([coinObjects[index]], recipient.address);
+            txb.transferObjects([coinObjects[index] as string], recipient.address);
           }
         });
 
         try {
           // Execute transaction using the correct API for @mysten/sui.js
           const result = await signAndExecuteTransactionBlock({
-            transactionBlock: txb,
-            options: {
-              showEffects: true,
-              showObjectChanges: true,
-            },
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            transactionBlock: txb as any,
           });
 
           // Mark all recipients in this batch as successful
