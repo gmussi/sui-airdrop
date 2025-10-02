@@ -36,7 +36,7 @@ export function CSVUpload({ onRecipientsChange }: CSVUploadProps) {
       header: true,
       skipEmptyLines: true,
       complete: (results) => {
-        const data = results.data as any[];
+        const data = results.data as Record<string, string>[];
         const newRecipients: AirdropRecipient[] = [];
         const newErrors: string[] = [];
 

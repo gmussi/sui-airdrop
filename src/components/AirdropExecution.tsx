@@ -84,7 +84,7 @@ export function AirdropExecution({ selectedToken, recipients, tokenInfo }: Airdr
           const amount = BigInt(Math.floor(parseFloat(recipient.amount) * Math.pow(10, tokenDecimals)));
           
           // Find a coin with sufficient balance
-          let coinToUse = coins.data.find(coin => BigInt(coin.balance) >= amount);
+          const coinToUse = coins.data.find(coin => BigInt(coin.balance) >= amount);
           if (!coinToUse) {
             // If no single coin has enough, we'd need to merge coins first
             // For simplicity, we'll skip this recipient

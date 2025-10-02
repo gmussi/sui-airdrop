@@ -1,10 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useWallet } from '@suiet/wallet-kit';
 import { SuiClient, getFullnodeUrl } from '@mysten/sui.js/client';
 import { Button } from './ui/Button';
 import { Coins, Wallet } from 'lucide-react';
+import Image from 'next/image';
 
 interface TokenBalance {
   coinType: string;
@@ -35,7 +36,6 @@ const WHITELISTED_TOKENS = [
 
 export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
   const { account, connected } = useWallet();
-  const client = new SuiClient({ url: getFullnodeUrl('mainnet') });
   const [tokens, setTokens] = useState<TokenBalance[]>([]);
   const [selectedToken, setSelectedToken] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -53,18 +53,19 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
     if (account && connected) {
       fetchTokens();
     }
-  }, [account, connected]);
+  }, [account, connected, fetchTokens]);
 
-  const fetchTokens = async () => {
+  const fetchTokens = useCallback(async () => {
     if (!account) return;
     
+    const client = new SuiClient({ url: getFullnodeUrl('mainnet') });
     setLoading(true);
     try {
       console.log('Fetching tokens for address:', account.address);
       
       // Get coins for each whitelisted token
       console.log('Getting coins for whitelisted tokens:', WHITELISTED_TOKENS);
-      const allCoins: any[] = [];
+      const allCoins: TokenBalance[] = [];
       
       for (const tokenType of WHITELISTED_TOKENS) {
         try {
@@ -96,7 +97,7 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
           acc.push({ ...coin });
         }
         return acc;
-      }, [] as any[]);
+      }, [] as TokenBalance[]);
       
       console.log('Merged coins:', mergedCoins);
       console.log('Merged coins count:', mergedCoins.length);
@@ -142,7 +143,7 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [account]);
 
   const formatBalance = (balance: string, decimals: number) => {
     const num = BigInt(balance);
@@ -278,9 +279,11 @@ export function TokenSelection({ onTokenSelect }: TokenSelectionProps) {
                   <div className="flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       {info?.iconUrl ? (
-                        <img
+                        <Image
                           src={info.iconUrl}
                           alt={info.symbol}
+                          width={32}
+                          height={32}
                           className="w-8 h-8 rounded-full"
                         />
                       ) : (

@@ -9,7 +9,6 @@ export function WalletConnection() {
   const { 
     connected, 
     connecting, 
-    select, 
     disconnect, 
     wallets, 
     currentWallet,
@@ -68,9 +67,6 @@ export function WalletConnection() {
     );
   }
 
-  const handleConnect = (walletName: string) => {
-    select(walletName);
-  };
 
   return (
     <div className="p-6 bg-gray-50 border border-gray-200 rounded-lg">
@@ -104,10 +100,10 @@ export function WalletConnection() {
               Connecting: {connecting ? 'Yes' : 'No'}
             </p>
             <p className="text-xs text-gray-600">
-              Window.suiet: {typeof window !== 'undefined' && (window as any).suiet ? 'Yes' : 'No'}
+              Window.suiet: {typeof window !== 'undefined' && (window as unknown as { suiet?: unknown }).suiet ? 'Yes' : 'No'}
             </p>
             <p className="text-xs text-gray-600">
-              Window.sui: {typeof window !== 'undefined' && (window as any).sui ? 'Yes' : 'No'}
+              Window.sui: {typeof window !== 'undefined' && (window as unknown as { sui?: unknown }).sui ? 'Yes' : 'No'}
             </p>
             <p className="text-xs text-gray-600">
               Mounted: {mounted ? 'Yes' : 'No'}

@@ -4,6 +4,7 @@ import { createContext, useContext, ReactNode } from 'react';
 import { WalletProvider } from '@suiet/wallet-kit';
 import '@suiet/wallet-kit/style.css';
 
+// eslint-disable-next-line @typescript-eslint/no-empty-object-type
 interface WalletContextType {
   // Add any additional context values here if needed
 }
